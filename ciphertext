@@ -1,0 +1,22 @@
+key1 = {} # Словари
+key2 = {}
+k1 = input() # Ключи
+k2 = input()
+str1 = input() # Строки для расшифровки
+str2 = input()
+str3 = ''  # Итог
+str4 = ''
+n=0 # Счетчик
+for i in k1: # Заполнение первого словаря (прямой ключ)
+    key1[i]=k2[n]
+    n+=1
+n=0
+for i in k2: # Заполнение второго словаря (обратный ключ)
+    key2[i]=k1[n]
+    n+=1
+for i in str1:
+    str3+=key1[i]
+for i in str2:
+    str4+=key2[i]
+print(str3)
+print(str4)
