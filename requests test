@@ -1,0 +1,29 @@
+import requests
+
+def req():
+    r = requests.get('https://kyraas.github.io/web/main.html')  # простой GET запрос
+    print(r.text)                                               # вывод ответа от сервера
+    
+def parameter():
+    url = 'https://kyraas.github.io/web/main.html'
+    par = {'key1': 'value1', 'key2': 'value2'}
+    r = requests.get(url, params=par)   # передача параметров в запрос
+    print(r.url)                        # сформированный url-адрес с учетом параметров GET запроса
+    
+def cook():
+    url = 'http://httpbin.org/cookies'
+    cookies = {'cookies_are': 'working'}
+    r = requests.get(url, cookies=cookies) # отправка сформированных cookies на сервер
+    print(r.text)
+    
+    # print(r.cookies['example_cookie_name']) # использование cookies, полученных от сервера (не работает)
+    
+menu = {
+        1: req,          # сохраняем ссылку на функцию внутри словаря, чтобы иметь возможность вызвать ее позже, получив ее из словаря по ключу
+        2: parameter,    # это возможно поскольку функции являются объектами первого класса в Python
+        3: cook
+        }
+
+print("1 - GET запрос \n2 - Передача параметров \n3 - Cookies")
+n = int(input())    # В данном случае n будет являться включом словаря, через который мы получаем ссылку на функцию
+menu.get(n)()       # А чтобы ее вызвать дописываем () (в данном контексте функции не передают параметры)
