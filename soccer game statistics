@@ -1,0 +1,43 @@
+n = int(input())    # Кол-во строк
+games = {}    # Словарь
+for _ in range(n):
+    str = input().split(';')    # Считываем строку, разделяя на элементы
+    str[1] = int(str[1])    # Заранее преобразовываем числа в int
+    str[3] = int(str[3])
+    
+    # Первая команда    
+    if str[0] in games:    # Если команда есть в словаре, то
+        games[str[0]][0] += 1    # +1 матч
+    else:
+        games[str[0]] = [0] * 5    # Если нет, то добавляем в словарь
+        games[str[0]][0] += 1    # +1 матч
+        
+    if str[1] > str[3]:    # Если первая команда выиграла, то
+        games[str[0]][1] += 1    # +1 победа
+        games[str[0]][4] += 3    # +3 очка за победу
+    elif str[1] < str[3]:    # Или если проиграла, то
+        games[str[0]][3] += 1    # +1 поражение (+0 очков)
+    else:
+        games[str[0]][2] += 1    # В ином случае +ничья
+        games[str[0]][4] += 1    # +1 очко
+        
+        # Вторая команда      
+    if str[2] in games: 
+        games[str[2]][0] += 1
+    else:
+        games[str[2]] = [0] * 5
+        games[str[2]][0] += 1
+        
+    if str[1] < str[3]:
+        games[str[2]][1] += 1
+        games[str[2]][4] += 3
+    elif str[1] > str[3]:
+        games[str[2]][3] += 1
+    else:
+        games[str[2]][2] += 1
+        games[str[2]][4] += 1
+        
+for i, j in games.items():
+    print(i, end=':')
+    print(*j)
+    
